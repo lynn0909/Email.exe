@@ -2,6 +2,7 @@ package frameDesigner;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -14,6 +15,7 @@ import org.omg.CORBA.PRIVATE_MEMBER;
 import javax.swing.JTextField;
 import javax.swing.SwingWorker;
 import javax.swing.JComboBox;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -46,7 +48,22 @@ public class loginframe extends JFrame {
 			public void run() {
 				try {
 					loginframe frame = new loginframe();//建立登录界面；
+					 
+						frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  
+					    ImageIcon img = new ImageIcon("image/login.jpg");//这是背景图片  
+					JLabel imgLabel = new JLabel(img);//将背景图放在标签里。
+					frame.getLayeredPane().add(imgLabel, new Integer(Integer.MIN_VALUE));//注意这里是关键，将背景标签添加到jfram的LayeredPane面板里。  
+					imgLabel.setBounds(0,0,img.getIconWidth(), img.getIconHeight());//设置背景标签的位置  
+					Container cp=frame.getContentPane();  
+					cp.setLayout(new BorderLayout());  
+					((JPanel)cp).setOpaque(false); //注意这里，将内容面板设为透明。这样LayeredPane面板中的背景才能显示出来。  
+		
+	
 					frame.setVisible(true);//界面可视化；
+					
+					
+					
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -83,24 +100,45 @@ public class loginframe extends JFrame {
 					  if(nameTrue==0&&(passwordTrue==0)){//密码用户名输入正确；
 						  if(loadMark==1){//登录成功；
 						  new mainFrame();
-						  mainFrame frame=new mainFrame();//跳转到主界面；
-						  frame.setVisible(true);//界面可视化；
+						  mainFrame frame1=new mainFrame();//跳转到主界面；
+						  frame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  
+						    ImageIcon img = new ImageIcon("image/mainFrame.jpg");//这是背景图片  
+						JLabel imgLabel = new JLabel(img);//将背景图放在标签里。
+						frame1.getLayeredPane().add(imgLabel, new Integer(Integer.MIN_VALUE));//注意这里是关键，将背景标签添加到jfram的LayeredPane面板里。  
+						imgLabel.setBounds(0,0,img.getIconWidth(), img.getIconHeight());//设置背景标签的位置  
+						Container cp=frame1.getContentPane();  
+						cp.setLayout(new BorderLayout());  
+						((JPanel)cp).setOpaque(false); //注意这里，将内容面板设为透明。这样LayeredPane面板中的背景才能显示出来。  
+			
+						  
+						  frame1.setVisible(true);//界面可视化；
 						  }
 						  else{//登录失败；
 							  new loginFailed();
 							  loginFailed frame = new loginFailed();//跳转到登录失败界面；
+							  frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  
+							    ImageIcon img = new ImageIcon("image/login.jpg");//这是背景图片  
+							JLabel imgLabel = new JLabel(img);//将背景图放在标签里。
+							frame.getLayeredPane().add(imgLabel, new Integer(Integer.MIN_VALUE));//注意这里是关键，将背景标签添加到jfram的LayeredPane面板里。  
+							imgLabel.setBounds(0,0,img.getIconWidth(), img.getIconHeight());//设置背景标签的位置  
+							Container cp=frame.getContentPane();  
+							cp.setLayout(new BorderLayout());  
+							((JPanel)cp).setOpaque(false); //注意这里，将内容面板设为透明。这样LayeredPane面板中的背景才能显示出来。  
+				
 								frame.setVisible(true);//界面可视化；
 						  }
 					  }
 					  else{
 						  setVisible(true);//回到登录界面；
 						  unloadtip.setText("用户名或密码不正确，请重新输入");//提示用户重新输入密码以及用户名；
+						  
 					  }
 				}
 
 		});
 		button.setBounds(216, 225, 93, 23);//设置按钮位置以及长宽；
 		contentPane.add(button);
+		
 		
 		JLabel label_useName = new JLabel("\u7528\u6237\u540D");//用户名·标签
 		label_useName.setBounds(120, 108, 54, 15);//设置用户名标签的位置以及长宽；
@@ -129,8 +167,8 @@ public class loginframe extends JFrame {
 		
 		unloadtip = new JLabel("");//密码或用户名不正确提示框；
 		unloadtip.setBounds(170, 200, 266, 15);
-		//unloadtip.setBackground(Color.blue);
-		unloadtip.setOpaque(true);
+		//unloadtip.setBackground(Color.BLACK);
+		unloadtip.setOpaque(false);
 		contentPane.add(unloadtip);
 		
 	}
